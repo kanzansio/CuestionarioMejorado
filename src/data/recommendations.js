@@ -231,8 +231,8 @@ const generatePriorities = (items) => {
 export const getAreaStatus = (score, max) => {
   const percentage = (score / max) * 100
   
-  if (percentage >= 88) return { label: 'Avanzado', color: '#3b82f6', bgColor: '#dbeafe' }
-  if (percentage >= 78) return { label: 'Competente', color: '#10b981', bgColor: '#dcfce7' }
+  if (percentage >= 88) return { label: 'Avanzado', color: '#1e3a5f', bgColor: '#dbeafe' }
+  if (percentage >= 78) return { label: 'Competente', color: '#5bb878', bgColor: '#dcfce7' }
   if (percentage >= 60) return { label: 'En Desarrollo', color: '#f59e0b', bgColor: '#fef3c7' }
   return { label: 'En Desarrollo', color: '#f59e0b', bgColor: '#fef3c7' }
 }
