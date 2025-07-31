@@ -1,9 +1,7 @@
 import { assessmentData } from './questions'
 
 export const generateRecommendations = (areaScores) => {
-  const items = []
-
-  assessmentData.areas.forEach(area => {
+  const byArea = assessmentData.areas.map(area => {
     const max = area.questions.length * 5
     const score = areaScores[area.id] || 0
     const pct = max ? score / max : 0
@@ -16,86 +14,73 @@ export const generateRecommendations = (areaScores) => {
     switch(area.id){
       case 'necesidad':
         actions = [
-          'Mapear puntos de dolor en prospección, calificación, propuestas y cierre',
-          'Priorizar 2–3 casos de IA de alto impacto y baja complejidad',
-          'Definir objetivos de cada caso y sus KPIs de negocio',
-          'Plan de adopción: responsables, hitos y riesgos'
-        ]
-        break
+          'Mapea puntos de dolor en prospección, calificación, propuestas y cierre; cuantifica impacto.',
+          'Selecciona 2–3 casos de uso de alto impacto de rápida implementación.',
+          'Define KPIs por caso (respuesta, citas, win rate, ciclo) y metas trimestrales.',
+          'Roadmap de adopción: responsables, riesgos y criterios de salida.'
+        ]; break
       case 'uso':
         actions = [
-          'Estandarizar el uso de asistentes de IA para copy y resúmenes de llamadas',
-          'Activar lead scoring/next-best-action en el CRM',
-          'Automatizar notas/actividades con IA (evitar copiar/pegar)',
-          'Checklist de QA para salidas de IA (revisión humana)'
-        ]
-        break
+          'Estandariza asistentes de IA para copy y resúmenes de llamadas con plantillas controladas.',
+          'Activa lead scoring/next-best-action en el CRM y entrena su interpretación al equipo.',
+          'Automatiza notas/actividades en CRM para eliminar copiar/pegar.',
+          'Define checklist de QA humana para contenido generado por IA.'
+        ]; break
       case 'datos':
         actions = [
-          'Definir campos obligatorios y reglas anti-duplicados en CRM',
-          'Auto-logging de llamadas/reuniones y correos',
-          'Datasets para A/B tests y evaluación de modelos',
-          'Data stewardship: responsables y políticas de calidad'
-        ]
-        break
+          'Campos obligatorios y reglas anti-duplicados; auditorías semanales de calidad.',
+          'Auto-logging de llamadas/reuniones/correos para cubrir brechas.',
+          'Datasets para A/B y evaluación; versionado y documentación.',
+          'Nombrar data stewards y definir políticas de gobernanza de datos.'
+        ]; break
       case 'herramientas':
         actions = [
-          'Habilitar herramientas de IA aprobadas y accesibles',
-          'Integrar plantillas/snippets/atajos al flujo del vendedor',
-          'Resúmenes automáticos y sugerencias de próximos pasos',
-          'Orquestar automatizaciones entre correo, CRM y voz'
-        ]
-        break
+          'Catálogo de herramientas aprobadas y accesos; onboarding simplificado.',
+          'Integrar snippets/atajos de IA en el flujo del vendedor.',
+          'Resúmenes automáticos post-llamada + “next steps” sugeridos.',
+          'Orquestar automatizaciones entre correo, CRM y voz (workflows).'
+        ]; break
       case 'prompts':
         actions = [
-          'Formación en patrón de prompts (rol-objetivo-formato-tono-límites)',
-          'Biblioteca por etapa (TOFU/MOFU/BOFU) y casos repetibles',
-          'Checklist de evaluación de salidas (fidelidad, relevancia, riesgos)',
-          'Sesiones de práctica con feedback y mejora continua'
-        ]
-        break
+          'Formación en patrón de prompts (rol-objetivo-formato-tono-límites) con ejemplos reales.',
+          'Biblioteca por etapa (TOFU/MOFU/BOFU) y por vertical; control de versiones.',
+          'Checklist de evaluación (fidelidad, relevancia, sesgo/riesgo).',
+          'Calendario de práctica y feedback entre pares (weekly clinics).'
+        ]; break
       case 'procesos':
         actions = [
-          '3 A/B tests mensuales (asuntos, CTAs, secuencias) con IA',
-          'Tableros por rep y por caso de uso (respuesta, citas, win rate, ciclo)',
-          'Rituales semanales/mensuales para actualizar playbooks',
-          'Etiquetado con/sin IA en oportunidades'
-        ]
-        break
+          'Plan de 3 A/B tests mensuales (asuntos, CTAs, secuencias) y tablero público.',
+          'OKRs de IA vinculados a KPIs; revisión quincenal.',
+          'Rituales de iteración (retro semanal / cierre mensual) y actualización de playbooks.',
+          'Etiquetado “con IA / sin IA” en oportunidades para atribución.'
+        ]; break
       case 'gobernanza':
         actions = [
-          'Políticas de PII/consentimiento y límites de uso de IA',
-          'Revisión humana obligatoria para contenido sensible',
-          'Registro de riesgos y mitigaciones (alucinación, sesgo, cumplimiento)',
-          'Auditorías periódicas y logs de actividad'
-        ]
-        break
+          'Políticas PII y límites de uso; consentimiento cuando aplique.',
+          'Revisión humana obligatoria para contenido sensible (propuestas/pricing).',
+          'Registro de riesgos (alucinación, sesgo); medidas de mitigación y escalamiento.',
+          'Auditorías y logs de actividad; formación en uso responsable.'
+        ]; break
       case 'impacto':
         actions = [
-          'Línea base y atribución (con/sin IA)',
-          'Medir lift en respuesta, citas, win rate y ciclo',
-          'Calcular ahorro de tiempo por rep y ticket medio',
-          'Repriorizar casos de uso según ROI'
-        ]
-        break
+          'Define línea base y metodología de atribución (con/sin IA).',
+          'Mide lift en respuesta, citas, win rate, ciclo; comunica resultados.',
+          'Calcula ahorro de tiempo por rep y ticket medio; re-invierte en casos con ROI.',
+          'Reprioriza cartera de casos de uso trimestralmente.'
+        ]; break
       default:
         actions = ['Estandarizar buenas prácticas y documentar aprendizajes']
     }
 
-    items.push({
-      areaId: area.id,
-      areaName: area.name,
+    return {
+      areaId: area.id, areaName: area.name,
       priority, timeline, actions,
-      percent: Math.round(pct*100),
-      score, max
-    })
+      percent: Math.round(pct*100), score, max
+    }
   })
 
   const order = { 'CRÍTICA': 0, 'ALTA': 1, 'MEDIA': 2, 'BAJA': 3 }
-  items.sort((a, b) => order[a.priority] - order[b.priority])
+  byArea.sort((a, b) => order[a.priority] - order[b.priority])
 
-  return {
-    byArea: items,
-    top3: items.slice(0, 3)
-  }
+  return { byArea, top3: byArea.slice(0, 3) }
 }

@@ -30,25 +30,18 @@ export default function Assessment({ onComplete }){
   const answeredCount = Object.keys(answers).length
   const progress = Math.round((answeredCount/totalQuestions)*100)
 
-  const select = (value) => {
-    setAnswers(prev => ({ ...prev, [currentQuestion.id]: value }))
-  }
+  const select = (value) => setAnswers(prev => ({ ...prev, [currentQuestion.id]: value }))
 
   const next = () => {
     if(questionIndex < currentArea.questions.length - 1){
       setQuestionIndex(questionIndex + 1)
     } else if(areaIndex < assessmentData.areas.length - 1){
-      setAreaIndex(areaIndex + 1)
-      setQuestionIndex(0)
+      setAreaIndex(areaIndex + 1); setQuestionIndex(0)
     } else {
-      // finish
-      const areaScores = {}
-      let totalScore = 0
+      const areaScores = {}; let totalScore = 0
       assessmentData.areas.forEach(area => {
-        let sum = 0
-        area.questions.forEach(q => { sum += answers[q.id] || 0 })
-        areaScores[area.id] = sum
-        totalScore += sum
+        const sum = area.questions.reduce((s,q)=>s+(answers[q.id]||0),0)
+        areaScores[area.id] = sum; totalScore += sum
       })
       onComplete({ answers, areaScores, totalScore, maxScore: totalQuestions * 5 })
     }
@@ -58,8 +51,7 @@ export default function Assessment({ onComplete }){
     if(questionIndex > 0) setQuestionIndex(questionIndex - 1)
     else if(areaIndex > 0){
       const prevArea = assessmentData.areas[areaIndex - 1]
-      setAreaIndex(areaIndex - 1)
-      setQuestionIndex(prevArea.questions.length - 1)
+      setAreaIndex(areaIndex - 1); setQuestionIndex(prevArea.questions.length - 1)
     }
   }
 

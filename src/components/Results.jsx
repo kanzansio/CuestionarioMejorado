@@ -62,7 +62,7 @@ export default function Results({ user, results, onRestart }){
                   <PolarGrid />
                   <PolarAngleAxis dataKey="area" />
                   <PolarRadiusAxis />
-                  <Radar name="Puntaje" dataKey="score" stroke="#2563eb" fill="#2563eb" fillOpacity={0.3} />
+                  <Radar name="Puntaje" dataKey="score" stroke="#5bb878" fill="#5bb878" fillOpacity={0.3} />
                 </RadarChart>
               </ResponsiveContainer>
             </div>
@@ -112,7 +112,7 @@ export default function Results({ user, results, onRestart }){
       <div className="card">
         <div style={{ fontWeight:700, marginBottom: 8 }}>Áreas de oportunidad y procesos a mejorar con IA</div>
         <div className="grid-3">
-          {recos.byArea.map((r) => (
+          {recos.byArea.filter(r => r.priority !== 'MEDIA').map((r) => (
             <div key={r.areaId} className="card">
               <div className="hstack" style={{ justifyContent:'space-between' }}>
                 <div style={{ fontWeight:700 }}>{r.areaName}</div>
