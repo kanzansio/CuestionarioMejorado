@@ -63,7 +63,7 @@ export const getMaturityLevel = (score, totalMax) => {
   const q1 = 0.25 * totalMax, q2 = 0.50 * totalMax, q3 = 0.75 * totalMax
   if (score <= q1) return { label: "Explorador", color: "#ef4444", description: "Pilotos dispersos; enfócate en datos/CRM y 1–2 casos de uso tractables." }
   if (score <= q2) return { label: "Iniciado",   color: "#f59e0b", description: "Adopción inicial; formaliza playbooks, plantillas de prompt y medición." }
-  if (score <= q3) return { label: "Integrador", color: "#3b82f6", description: "Fluye en el día a día; acelera A/B tests, automatiza CRM y QA." }
+  if (score <= q3) return { label: "Integrador", color: "#1e3a5f", description: "Fluye en el día a día; acelera A/B tests, automatiza CRM y QA." }
   return { label: "Orquestador", color: "#5bb878", description: "Optimización continua; escala automatizaciones y mide ROI por caso de uso." }
 }
 
@@ -71,6 +71,6 @@ export const getAreaMaturityLevel = (areaScore, areaMax) => {
   const q1 = 0.25 * areaMax, q2 = 0.50 * areaMax, q3 = 0.75 * areaMax
   if (areaScore <= q1) return { label: "Explorador", color: "#ef4444", min: 0, max: q1 }
   if (areaScore <= q2) return { label: "Iniciado",   color: "#f59e0b", min: q1, max: q2 }
-  if (areaScore <= q3) return { label: "Integrador", color: "#3b82f6", min: q2, max: q3 }
+  if (areaScore <= q3) return { label: "Integrador", color: "#1e3a5f", min: q2, max: q3 }
   return { label: "Orquestador", color: "#5bb878", min: q3, max: areaMax }
 }
