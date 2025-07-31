@@ -1,70 +1,118 @@
 export const assessmentData = {
   areas: [
-    { id: "necesidad", name: "Necesidad Percibida e Impacto", description: "Dónde la IA aportaría más valor", questions: [
-      { id: "N1", text: "Prospección insuficiente: IA podría ampliar alcance y personalización.", type: "likert" },
-      { id: "N2", text: "Calificación inconsistente; IA ayudaría a priorizar leads.", type: "likert" },
-      { id: "N3", text: "Ciclo de venta largo; IA podría acortarlo con automatizaciones.", type: "likert" },
-      { id: "N4", text: "El equipo necesita soporte en propuestas/objeciones; IA mejoraría calidad.", type: "likert" }
-    ]},
-    { id: "uso", name: "Uso Actual de IA", description: "Adopción en el día a día", questions: [
-      { id: "U1", text: "Asistentes de IA para redactar emails/mensajes de alcance.", type: "likert" },
-      { id: "U2", text: "IA en llamadas: transcripción, resúmenes y próximos pasos.", type: "likert" },
-      { id: "U3", text: "Lead scoring/next-best-action activo en CRM.", type: "likert" },
-      { id: "U4", text: "Actualizaciones automáticas al CRM (notas, actividades).", type: "likert" }
-    ]},
-    { id: "datos", name: "Datos y CRM", description: "Calidad, cobertura e integración", questions: [
-      { id: "D1", text: "CRM con registros completos (campos clave ≥90%).", type: "likert" },
-      { id: "D2", text: "Higiene de datos (duplicados, campos críticos, actividad).", type: "likert" },
-      { id: "D3", text: "Integración IA↔CRM sin pasos manuales.", type: "likert" },
-      { id: "D4", text: "Datasets para A/B tests y evaluación de modelos.", type: "likert" }
-    ]},
-    { id: "herramientas", name: "Herramientas y Automatización", description: "Orquestación en el flujo del vendedor", questions: [
-      { id: "H1", text: "Herramientas de IA aprobadas y accesibles.", type: "likert" },
-      { id: "H2", text: "Flujo con plantillas, snippets y atajos de IA.", type: "likert" },
-      { id: "H3", text: "Resúmenes automáticos y sugerencias de próximos pasos.", type: "likert" },
-      { id: "H4", text: "Automatizaciones multi-herramienta (correo, CRM, voz).", type: "likert" }
-    ]},
-    { id: "prompts", name: "Habilidades de Prompting", description: "Pedir y evaluar salidas de IA", questions: [
-      { id: "P1", text: "Dominio de prompts (rol, objetivo, formato, tono, límites).", type: "likert" },
-      { id: "P2", text: "Biblioteca de prompts por etapa (TOFU/MOFU/BOFU).", type: "likert" },
-      { id: "P3", text: "Checklist de evaluación (fidelidad, relevancia, riesgo).", type: "likert" },
-      { id: "P4", text: "Práctica e iteración con feedback estructurado.", type: "likert" }
-    ]},
-    { id: "procesos", name: "Procesos y Medición", description: "A/B testing y mejora continua", questions: [
-      { id: "PR1", text: "A/B tests con y sin IA: asuntos, CTAs, secuencias.", type: "likert" },
-      { id: "PR2", text: "Tableros por rep y caso de uso (respuesta, citas, win rate, ciclo).", type: "likert" },
-      { id: "PR3", text: "Rituales semanales/mensuales de actualización de playbooks.", type: "likert" },
-      { id: "PR4", text: "Etiquetado con/sin IA en oportunidades.", type: "likert" }
-    ]},
-    { id: "gobernanza", name: "Gobernanza y Seguridad", description: "Políticas, riesgos y cumplimiento", questions: [
-      { id: "G1", text: "Políticas de PII/consentimiento y límites de uso de IA.", type: "likert" },
-      { id: "G2", text: "Revisión humana para contenido sensible.", type: "likert" },
-      { id: "G3", text: "Registro de riesgos y mitigaciones (alucinación, sesgo, cumplimiento).", type: "likert" },
-      { id: "G4", text: "Auditorías periódicas y logs de uso.", type: "likert" }
-    ]},
-    { id: "impacto", name: "Impacto y ROI", description: "Resultados atribuibles a IA", questions: [
-      { id: "I1", text: "Ahorro de tiempo por rep (≥20–30%).", type: "likert" },
-      { id: "I2", text: "Aumento de respuesta y agendamientos.", type: "likert" },
-      { id: "I3", text: "Mejora de win rate o ciclo (≥2 periodos).", type: "likert" },
-      { id: "I4", text: "Caso financiero (ROI) establecido.", type: "likert" }
-    ]}
+    {
+      id: "estrategia",
+      name: "Estrategia y Objetivos",
+      description: "Dirección clara, metas visibles y límites de uso",
+      questions: [
+        { id: "A1Q1", text: "¿El equipo sabe para qué tareas específicas usa la IA?" },
+        { id: "A1Q2", text: "¿Existen metas simples ligadas al uso de IA (tiempo, respuesta, citas)?" },
+        { id: "A1Q3", text: "¿Cada rol conoce qué se espera de su uso de IA?" },
+        { id: "A1Q4", text: "¿Hay un plan trimestral para incorporar/mejorar casos de uso?" },
+        { id: "A1Q5", text: "¿Están claros los límites y riesgos (datos sensibles, promesas)?" }
+      ]
+    },
+    {
+      id: "prospectos",
+      name: "Prospección y Priorización",
+      description: "Encontrar, enriquecer y ordenar a quién contactar primero",
+      questions: [
+        { id: "A2Q1", text: "¿Usan IA para generar listas iniciales de prospectos?" },
+        { id: "A2Q2", text: "¿La IA ayuda a priorizar cuentas/contactos (caliente/templado/frío)?" },
+        { id: "A2Q3", text: "¿La IA enriquece con datos públicos útiles (sector, noticias)?" },
+        { id: "A2Q4", text: "¿La IA detecta señales sencillas para elegir el momento de contacto?" },
+        { id: "A2Q5", text: "¿Revisan y ajustan criterios de priorización de forma regular?" }
+      ]
+    },
+    {
+      id: "mensajes",
+      name: "Mensajes Comerciales",
+      description: "Claridad, personalización y secuencias",
+      questions: [
+        { id: "A3Q1", text: "¿La IA ayuda a crear borradores claros y breves?" },
+        { id: "A3Q2", text: "¿La IA añade contexto del cliente sin sonar genérico?" },
+        { id: "A3Q3", text: "¿Usan IA para mejorar tono/claridad antes de enviar?" },
+        { id: "A3Q4", text: "¿Prueban variantes simples (asunto o primer párrafo)?" },
+        { id: "A3Q5", text: "¿Usan secuencias de seguimiento con intervalos razonables?" }
+      ]
+    },
+    {
+      id: "reuniones",
+      name: "Llamadas, Reuniones y CRM",
+      description: "Preparación, notas útiles y próximos pasos claros",
+      questions: [
+        { id: "A4Q1", text: "¿La IA arma un brief previo de la cuenta antes de la llamada?" },
+        { id: "A4Q2", text: "¿Generan resúmenes accionables con acuerdos y tareas?" },
+        { id: "A4Q3", text: "¿La IA ayuda a registrar notas claras en el CRM?" },
+        { id: "A4Q4", text: "¿Configuran recordatorios y cadencias con borradores listos?" },
+        { id: "A4Q5", text: "¿Tienen una vista 360 de la cuenta (línea de tiempo)?" }
+      ]
+    },
+    {
+      id: "material",
+      name: "Material Comercial",
+      description: "Propuestas, casos y comparativas",
+      questions: [
+        { id: "A5Q1", text: "¿La IA crea propuestas base con secciones estándar?" },
+        { id: "A5Q2", text: "¿Adapta casos de éxito al tamaño/sector del cliente?" },
+        { id: "A5Q3", text: "¿Tienen banco de respuestas a objeciones comunes?" },
+        { id: "A5Q4", text: "¿La IA arma comparativas neutrales (cuándo sí/cuándo no)?" },
+        { id: "A5Q5", text: "¿Generan presentaciones listas para pulir (alineadas a marca)?" }
+      ]
+    },
+    {
+      id: "capacitacion",
+      name: "Capacitación y Adopción",
+      description: "Onboarding, práctica y cultura de compartir",
+      questions: [
+        { id: "A6Q1", text: "¿Existe una guía de inicio con usos sí/no y ejemplos?" },
+        { id: "A6Q2", text: "¿Realizan micro-sesiones para practicar prompts?" },
+        { id: "A6Q3", text: "¿Mantienen un repositorio vivo de plantillas y ejemplos?" },
+        { id: "A6Q4", text: "¿Tienen canal de soporte entre pares y FAQ?" },
+        { id: "A6Q5", text: "¿Reconocen a quienes comparten buenas prácticas?" }
+      ]
+    },
+    {
+      id: "etica",
+      name: "Ética, Seguridad y Calidad",
+      description: "Guardrails, revisión humana y veracidad",
+      questions: [
+        { id: "A7Q1", text: "¿El equipo conoce qué datos no deben usarse con IA?" },
+        { id: "A7Q2", text: "¿Hay revisión humana obligatoria antes de enviar piezas clave?" },
+        { id: "A7Q3", text: "¿Guardan fuentes para cifras y evitan promesas absolutas?" },
+        { id: "A7Q4", text: "¿La IA mantiene el tono/valores de la marca?" },
+        { id: "A7Q5", text: "¿Tienen historial de versiones y control de accesos?" }
+      ]
+    },
+    {
+      id: "medicion",
+      name: "Medición e Iteración",
+      description: "KPIs, experimentos y mejoras constantes",
+      questions: [
+        { id: "A8Q1", text: "¿Definen 2–3 KPIs simples (tiempo, respuesta, citas)?" },
+        { id: "A8Q2", text: "¿Realizan pruebas A/B y documentan aprendizajes?" },
+        { id: "A8Q3", text: "¿Actualizan plantillas/cadencias según resultados?" },
+        { id: "A8Q4", text: "¿Detectan cuellos de botella por etapa/segmento?" },
+        { id: "A8Q5", text: "¿Incorporan la voz del cliente a mensajes/guiones?" }
+      ]
+    }
   ]
 }
 
 export const scaleOptions = [
-  { value: 1, text: "Nunca / No existe" },
-  { value: 2, text: "A veces / Piloto aislado" },
-  { value: 3, text: "Regular / Integración inicial" },
-  { value: 4, text: "Consistente / Estándar de equipo" },
-  { value: 5, text: "Avanzado / Automatizado y medido" }
+  { value: 1, text: "1 — No lo hacemos" },
+  { value: 2, text: "2 — Lo hemos probado muy poco" },
+  { value: 3, text: "3 — A veces, sin método claro" },
+  { value: 4, text: "4 — Con reglas simples y consistencia" },
+  { value: 5, text: "5 — Siempre, con buenas prácticas y medición" }
 ]
 
 export const getMaturityLevel = (score, totalMax) => {
   const q1 = 0.25 * totalMax, q2 = 0.50 * totalMax, q3 = 0.75 * totalMax
-  if (score <= q1) return { label: "Explorador", color: "#ef4444", description: "Pilotos dispersos; enfócate en datos/CRM y 1–2 casos de uso tractables." }
-  if (score <= q2) return { label: "Iniciado",   color: "#f59e0b", description: "Adopción inicial; formaliza playbooks, plantillas de prompt y medición." }
-  if (score <= q3) return { label: "Integrador", color: "#1e3a5f", description: "Fluye en el día a día; acelera A/B tests, automatiza CRM y QA." }
-  return { label: "Orquestador", color: "#5bb878", description: "Optimización continua; escala automatizaciones y mide ROI por caso de uso." }
+  if (score <= q1) return { label: "Explorador", color: "#ef4444", description: "Primeros pasos: define guía y 3 casos de uso." }
+  if (score <= q2) return { label: "Iniciado",   color: "#f59e0b", description: "En prueba: estandariza plantillas y mide 2–3 KPIs." }
+  if (score <= q3) return { label: "Integrador", color: "#1e3a5f", description: "En marcha: integra con CRM y haz A/B regulares." }
+  return { label: "Orquestador", color: "#5bb878", description: "Avanzado: automatiza, escala y mide ROI por caso de uso." }
 }
 
 export const getAreaMaturityLevel = (areaScore, areaMax) => {
