@@ -26,15 +26,34 @@ export default function Results({ user, results, onRestart }){
   const refReport = useRef(null)
   const downloadPDF = async () => {
     const el = refReport.current
-    const canvas = await html2canvas(el, { scale: 2 })
-    const img = canvas.toDataURL('image/png')
-    const pdf = new jsPDF('p','mm','a4')
-    const pageWidth = pdf.internal.pageSize.getWidth()
-    const imgProps = pdf.getImageProperties(img)
-    const ratio = imgProps.width / imgProps.height
-    const pdfWidth = pageWidth - 20
-    const pdfHeight = pdfWidth / ratio
-    pdf.addImage(img, 'PNG', 10, 10, pdfWidth, pdfHeight)
+    const canvas = await html2canvas(el, { 
+      scale: 2,
+      useCORS: true,
+      allowTaint: true,
+      windowHeight: el.scrollHeight
+    })
+    
+    const imgData = canvas.toDataURL('image/png')
+    const pdf = new jsPDF('p', 'mm', 'a4')
+    
+    const imgWidth = 210 // A4 width in mm
+    const pageHeight = 297 // A4 height in mm
+    const imgHeight = (canvas.height * imgWidth) / canvas.width
+    let heightLeft = imgHeight
+    let position = 0
+    
+    // Add first page
+    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
+    heightLeft -= pageHeight
+    
+    // Add additional pages if needed
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight
+      pdf.addPage()
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
+      heightLeft -= pageHeight
+    }
+    
     pdf.save('diagnostico-ia-ventas.pdf')
   }
 
@@ -60,8 +79,8 @@ export default function Results({ user, results, onRestart }){
     .sort((a, b) => a.percentage - b.percentage)
 
   const getScoreColor = (percentage) => {
-    if (percentage >= 75) return '#10b981'
-    if (percentage >= 50) return '#3b82f6'
+    if (percentage >= 75) return '#5bb878'
+    if (percentage >= 50) return '#1e3a5f'
     if (percentage >= 25) return '#f59e0b'
     return '#ef4444'
   }
@@ -92,7 +111,7 @@ export default function Results({ user, results, onRestart }){
             <button className="btn secondary" onClick={onRestart} style={{ background: 'rgba(255,255,255,0.2)', border: '1px solid rgba(255,255,255,0.3)', color: 'white' }}>
               Nueva evaluación
             </button>
-            <button className="btn" onClick={downloadPDF} style={{ background: 'white', color: '#667eea' }}>
+            <button className="btn" onClick={downloadPDF} style={{ background: 'white', color: '#1e3a5f' }}>
               📄 Descargar Reporte
             </button>
           </div>
@@ -166,8 +185,8 @@ export default function Results({ user, results, onRestart }){
                 <Radar 
                   name="Puntaje" 
                   dataKey="score" 
-                  stroke="#2563eb" 
-                  fill="#2563eb" 
+                  stroke="#5bb878" 
+                  fill="#5bb878" 
                   fillOpacity={0.2}
                   strokeWidth={2}
                 />
@@ -198,7 +217,7 @@ export default function Results({ user, results, onRestart }){
                     boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
                   }} 
                 />
-                <Bar dataKey="score" fill="#10b981" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="score" fill="#5bb878" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -342,7 +361,7 @@ export default function Results({ user, results, onRestart }){
       </div>
 
       {/* Call to Action Final */}
-      <div className="card" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white', textAlign: 'center' }}>
+      <div className="card" style={{ background: 'linear-gradient(135deg, #5bb878 0%, #1e3a5f 100%)', color: 'white', textAlign: 'center' }}>
         <div style={{ fontSize: '24px', fontWeight: 800, marginBottom: 12 }}>
           ¿Listo para llevar tu equipo al siguiente nivel?
         </div>
@@ -362,6 +381,25 @@ export default function Results({ user, results, onRestart }){
           </button>
         </div>
       </div>
+
+      {/* Footer con créditos */}
+      <div className="no-print" style={{
+        padding: '40px 0 20px 0',
+        textAlign: 'center',
+        marginTop: '60px'
+      }}>
+        <div style={{
+          fontSize: '12px',
+          color: 'var(--muted)',
+          lineHeight: 1.6,
+          opacity: 0.7
+        }}>
+          Desarrollado por <strong>Aldo Malpica</strong> • Fundador de IVen Academy<br/>
+          Programado y diseñado por <strong>Kanzansio.digital</strong> • Powered by IA
+        </div>
+      </div>
+
     </div>
   )
 }
+
